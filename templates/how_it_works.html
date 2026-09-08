@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}How It Works - Agricultural Science & ML Pipeline{% endblock %}
+
+{% block content %}
+
+<header class="hero-header" style="background: linear-gradient(135deg, #065f46 0%, #10b981 100%);">
+    <div class="hero-content">
+        <span class="hero-tag">⚙️ Scientific Workflow</span>
+        <h1 class="hero-title">How Crop Recommendation Works</h1>
+        <p class="hero-desc">
+            Understand how soil chemistry, climate data, and machine learning combine to deliver precise agronomic advice.
+        </p>
+    </div>
+</header>
+
+<!-- 4 Step Pipeline -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+    
+    <div class="glass-panel" style="padding: 1.5rem; position: relative;">
+        <span style="background: var(--accent-gradient); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">1</span>
+        <h4 style="margin-bottom: 0.5rem; color: var(--text-main);">Soil & Climate Test</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Measure N, P, K nutrient levels from soil testing kits along with local temperature and rainfall data.</p>
+    </div>
+
+    <div class="glass-panel" style="padding: 1.5rem; position: relative;">
+        <span style="background: var(--accent-gradient); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">2</span>
+        <h4 style="margin-bottom: 0.5rem; color: var(--text-main);">Parameter Input</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Enter metrics or choose one of our quick presets (e.g. Rice Paddy, Cotton Belt, Arid Zone).</p>
+    </div>
+
+    <div class="glass-panel" style="padding: 1.5rem; position: relative;">
+        <span style="background: var(--accent-gradient); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">3</span>
+        <h4 style="margin-bottom: 0.5rem; color: var(--text-main);">Random Forest ML</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">100 Decision Trees evaluate complex parameter interactions against 2,200 trained agricultural profiles.</p>
+    </div>
+
+    <div class="glass-panel" style="padding: 1.5rem; position: relative;">
+        <span style="background: var(--accent-gradient); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 1rem;">4</span>
+        <h4 style="margin-bottom: 0.5rem; color: var(--text-main);">Radar & Insights</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Receive primary & fallback recommendations with a radar chart showing field vs optimal nutrient overlays.</p>
+    </div>
+
+</div>
+
+<!-- Parameter Explainer Cards -->
+<div class="glass-panel" style="padding: 2rem;">
+    <h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+        🧪 Understanding Soil & Climatic Parameters
+    </h3>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        
+        <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="color: var(--accent-primary); margin-bottom: 0.4rem;">🧪 Nitrogen (N)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Essential for leaf growth, chlorophyll development, and vegetative strength in cereal crops like Rice and Maize.</p>
+        </div>
+
+        <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="color: #ec4899; margin-bottom: 0.4rem;">⚡ Phosphorus (P)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Crucial for root development, seed production, and early plant vigor. High in legumes and pulses like Chickpea.</p>
+        </div>
+
+        <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="color: #8b5cf6; margin-bottom: 0.4rem;">💎 Potassium (K)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Regulates water retention, disease resistance, and fruit quality. Critical for heavy potassium feeders like Apple and Grapes.</p>
+        </div>
+
+        <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="color: #f59e0b; margin-bottom: 0.4rem;">🌡️ Temperature (°C)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Governs metabolic rates and photosynthesis. Distinguishes cool temperate crops (Apples) from tropical crops (Papaya).</p>
+        </div>
+
+        <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="color: #06b6d4; margin-bottom: 0.4rem;">💧 Relative Humidity (%)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Impacts transpiration and fungal susceptibility. Essential factor for humid coastal crops like Coconut and Jute.</p>
+        </div>
+
+        <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h4 style="color: #3b82f6; margin-bottom: 0.4rem;">🌧️ Annual Rainfall (mm)</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">The #1 predictor feature in our model! Determines total water availability for high-water crops (Rice, Jute) vs dryland crops (Mothbeans).</p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

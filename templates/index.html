@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+
+{% block title %}Smart Crop Recommendation Predictor & AI Insights{% endblock %}
+
+{% block content %}
+
+<!-- Hero Banner -->
+<header class="hero-header">
+    <div class="hero-content">
+        <span class="hero-tag">✨ AI-Powered Agronomy</span>
+        <h1 class="hero-title">Precision Crop Recommendation</h1>
+        <p class="hero-desc">
+            Analyze soil nutrients (N-P-K), climatic parameters, temperature, humidity, pH, and rainfall to discover the highest yielding crop for your farm.
+        </p>
+    </div>
+</header>
+
+<!-- Presets Bar -->
+<section class="presets-section">
+    <div class="presets-title">
+        <span>⚡ Quick Soil & Climate Presets:</span>
+    </div>
+    <div class="preset-pills">
+        <button type="button" class="preset-btn" data-preset="paddy">
+            🌾 Rice Paddy Field
+        </button>
+        <button type="button" class="preset-btn" data-preset="cotton">
+            ☁️ Cotton Alluvial Belt
+        </button>
+        <button type="button" class="preset-btn" data-preset="arid">
+            ☀️ Arid Fruit Zone
+        </button>
+        <button type="button" class="preset-btn" data-preset="highland">
+            🍎 Highland Orchard
+        </button>
+        <button type="button" class="preset-btn" data-preset="coastal">
+            🥥 Coastal Tropical
+        </button>
+    </div>
+</section>
+
+<!-- Predictor Layout Grid -->
+<div class="predictor-grid">
+    
+    <!-- Input Form Section -->
+    <div class="glass-panel inputs-container">
+        <div class="section-heading">
+            <h3>🌱 Soil & Climate Metrics</h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">7 Factors</span>
+        </div>
+
+        <form id="cropForm" method="POST" action="/">
+            <div class="inputs-grid">
+                
+                <!-- Nitrogen (N) -->
+                <div class="input-card">
+                    <div class="input-header">
+                        <label class="input-label" for="input_N">
+                            <span>🧪 Nitrogen (N)</span>
+                        </label>
+                        <span class="input-unit">0 - 140 kg/ha</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_N" name="N" class="custom-num-input" 
+                               min="0" max="140" step="1" value="{{ request.form.get('N', 50) }}" required>
+                    </div>
+                    <input type="range" id="slider_N" class="custom-slider" 
+                           min="0" max="140" step="1" value="{{ request.form.get('N', 50) }}">
+                </div>
+
+                <!-- Phosphorus (P) -->
+                <div class="input-card">
+                    <div class="input-header">
+                        <label class="input-label" for="input_P">
+                            <span>⚡ Phosphorus (P)</span>
+                        </label>
+                        <span class="input-unit">5 - 145 kg/ha</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_P" name="P" class="custom-num-input" 
+                               min="5" max="145" step="1" value="{{ request.form.get('P', 50) }}" required>
+                    </div>
+                    <input type="range" id="slider_P" class="custom-slider" 
+                           min="5" max="145" step="1" value="{{ request.form.get('P', 50) }}">
+                </div>
+
+                <!-- Potassium (K) -->
+                <div class="input-card">
+                    <div class="input-header">
+                        <label class="input-label" for="input_K">
+                            <span>💎 Potassium (K)</span>
+                        </label>
+                        <span class="input-unit">5 - 205 kg/ha</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_K" name="K" class="custom-num-input" 
+                               min="5" max="205" step="1" value="{{ request.form.get('K', 50) }}" required>
+                    </div>
+                    <input type="range" id="slider_K" class="custom-slider" 
+                           min="5" max="205" step="1" value="{{ request.form.get('K', 50) }}">
+                </div>
+
+                <!-- Temperature -->
+                <div class="input-card">
+                    <div class="input-header">
+                        <label class="input-label" for="input_temperature">
+                            <span>🌡️ Temperature</span>
+                        </label>
+                        <span class="input-unit">8 - 45 °C</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_temperature" name="temperature" class="custom-num-input" 
+                               min="8" max="45" step="0.1" value="{{ request.form.get('temperature', 25.0) }}" required>
+                    </div>
+                    <input type="range" id="slider_temperature" class="custom-slider" 
+                           min="8" max="45" step="0.1" value="{{ request.form.get('temperature', 25.0) }}">
+                </div>
+
+                <!-- Humidity -->
+                <div class="input-card">
+                    <div class="input-header">
+                        <label class="input-label" for="input_humidity">
+                            <span>💧 Humidity</span>
+                        </label>
+                        <span class="input-unit">10 - 100 %</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_humidity" name="humidity" class="custom-num-input" 
+                               min="10" max="100" step="0.1" value="{{ request.form.get('humidity', 70.0) }}" required>
+                    </div>
+                    <input type="range" id="slider_humidity" class="custom-slider" 
+                           min="10" max="100" step="0.1" value="{{ request.form.get('humidity', 70.0) }}">
+                </div>
+
+                <!-- Soil pH -->
+                <div class="input-card">
+                    <div class="input-header">
+                        <label class="input-label" for="input_ph">
+                            <span>🧪 Soil pH</span>
+                        </label>
+                        <span class="input-unit">3.5 - 10.0</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_ph" name="ph" class="custom-num-input" 
+                               min="3.5" max="10" step="0.1" value="{{ request.form.get('ph', 6.5) }}" required>
+                    </div>
+                    <input type="range" id="slider_ph" class="custom-slider" 
+                           min="3.5" max="10" step="0.1" value="{{ request.form.get('ph', 6.5) }}">
+                </div>
+
+                <!-- Rainfall -->
+                <div class="input-card" style="grid-column: 1 / -1;">
+                    <div class="input-header">
+                        <label class="input-label" for="input_rainfall">
+                            <span>🌧️ Rainfall</span>
+                        </label>
+                        <span class="input-unit">20 - 300 mm</span>
+                    </div>
+                    <div class="num-input-wrapper">
+                        <input type="number" id="input_rainfall" name="rainfall" class="custom-num-input" 
+                               min="20" max="300" step="1" value="{{ request.form.get('rainfall', 100) }}" required>
+                    </div>
+                    <input type="range" id="slider_rainfall" class="custom-slider" 
+                           min="20" max="300" step="1" value="{{ request.form.get('rainfall', 100) }}">
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                    <span>🌾 Recommend Optimal Crop</span>
+                </button>
+                <a href="/" class="btn-secondary" style="text-decoration: none;">
+                    <span>🔄 Reset</span>
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Output & Radar Chart Section -->
+    <div class="glass-panel results-container" id="resultsContainer">
+        {% if crop %}
+            <div class="recommendation-card">
+                <span class="rec-header-tag">🌾 AI Optimal Recommendation</span>
+                <h2 class="crop-title">{{ crop }}</h2>
+                <div class="crop-confidence">Match Confidence: {{ confidence }}%</div>
+            </div>
+
+            {% if top_probabilities %}
+            <div class="prob-section">
+                <div class="prob-title">Top Recommended Alternatives</div>
+                {% for item in top_probabilities[:3] %}
+                <div class="prob-item">
+                    <span class="prob-name">{{ item.crop }} {% if loop.first %}⭐{% endif %}</span>
+                    <div class="prob-bar-track">
+                        <div class="prob-bar-fill" style="width: {{ item.probability }}%;"></div>
+                    </div>
+                    <span class="prob-val">{{ item.probability }}%</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="chart-card">
+                <div class="chart-title">
+                    <span>📊 Field Condition vs Optimal {{ crop }} Profile</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="cropRadarChart"></canvas>
+                </div>
+            </div>
+
+            {% if crop and user_input %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof renderRadarChart === 'function') {
+                        renderRadarChart(
+                            {{ user_input|tojson|safe }},
+                            {{ crop_stats|tojson|safe }},
+                            {{ crop|tojson|safe }}
+                        );
+                    }
+                });
+            </script>
+            {% endif %}
+        {% else %}
+            <div class="placeholder-state">
+                <div class="placeholder-icon">🌱</div>
+                <h3 class="placeholder-title">Awaiting Soil & Climate Inputs</h3>
+                <p>Adjust the sliders or select a preset on the left, then click <strong>"Recommend Optimal Crop"</strong> to generate your AI recommendation and radar comparison.</p>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

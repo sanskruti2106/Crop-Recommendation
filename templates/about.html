@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}Model Insights & Feature Importance - Crop Recommendation AI{% endblock %}
+
+{% block content %}
+
+<header class="hero-header" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+    <div class="hero-content">
+        <span class="hero-tag">📊 Machine Learning Metrics</span>
+        <h1 class="hero-title">Random Forest Model Performance</h1>
+        <p class="hero-desc">
+            Explore the machine learning architecture, feature importances, dataset balance, and evaluation statistics driving precision crop recommendations.
+        </p>
+    </div>
+</header>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+    
+    <div class="glass-panel" style="padding: 1.75rem; text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-primary); margin-bottom: 0.25rem;">
+            {{ accuracy if accuracy else '99.55' }}%
+        </div>
+        <div style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">Model Test Accuracy</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem;">Evaluated on 440 stratified test samples</p>
+    </div>
+
+    <div class="glass-panel" style="padding: 1.75rem; text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-secondary); margin-bottom: 0.25rem;">
+            2,200
+        </div>
+        <div style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">Dataset Observations</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem;">Balanced across 22 distinct crop categories</p>
+    </div>
+
+    <div class="glass-panel" style="padding: 1.75rem; text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-gold); margin-bottom: 0.25rem;">
+            100
+        </div>
+        <div style="font-weight: 700; font-size: 1.1rem; color: var(--text-main);">Decision Trees</div>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem;">Ensemble Random Forest Classifier</p>
+    </div>
+
+</div>
+
+<div class="predictor-grid" style="grid-template-columns: 1fr 1fr;">
+    
+    <div class="glass-panel" style="padding: 2rem;">
+        <h3 style="margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+            🏆 Feature Importance Ranking
+        </h3>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            Relative weight of each environmental parameter in determining the recommended crop:
+        </p>
+
+        <div class="prob-section">
+            <div class="prob-item">
+                <span class="prob-name">🌧️ Rainfall</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 24%; background: #3b82f6;"></div>
+                </div>
+                <span class="prob-val">24.2%</span>
+            </div>
+            <div class="prob-item">
+                <span class="prob-name">💧 Humidity</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 21%; background: #06b6d4;"></div>
+                </div>
+                <span class="prob-val">21.5%</span>
+            </div>
+            <div class="prob-item">
+                <span class="prob-name">💎 Potassium (K)</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 18%; background: #8b5cf6;"></div>
+                </div>
+                <span class="prob-val">18.1%</span>
+            </div>
+            <div class="prob-item">
+                <span class="prob-name">⚡ Phosphorus (P)</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 14%; background: #ec4899;"></div>
+                </div>
+                <span class="prob-val">14.3%</span>
+            </div>
+            <div class="prob-item">
+                <span class="prob-name">🧪 Nitrogen (N)</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 11%; background: #10b981;"></div>
+                </div>
+                <span class="prob-val">10.8%</span>
+            </div>
+            <div class="prob-item">
+                <span class="prob-name">🌡️ Temperature</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 7%; background: #f59e0b;"></div>
+                </div>
+                <span class="prob-val">7.2%</span>
+            </div>
+            <div class="prob-item">
+                <span class="prob-name">🧪 Soil pH</span>
+                <div class="prob-bar-track">
+                    <div class="prob-bar-fill" style="width: 4%; background: #64748b;"></div>
+                </div>
+                <span class="prob-val">3.9%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-panel" style="padding: 2rem;">
+        <h3 style="margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+            🧬 Algorithm & Dataset Architecture
+        </h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; color: var(--text-muted); font-size: 0.95rem;">
+            <li style="display: flex; gap: 0.75rem;">
+                <span>🌲</span>
+                <div>
+                    <strong style="color: var(--text-main);">Random Forest Classifier:</strong>
+                    An ensemble method creating 100 decision trees to prevent overfitting and capture non-linear agricultural interactions.
+                </div>
+            </li>
+            <li style="display: flex; gap: 0.75rem;">
+                <span>⚖️</span>
+                <div>
+                    <strong style="color: var(--text-main);">Stratified Train-Test Split:</strong>
+                    80% training (1,760 samples) and 20% testing (440 samples) maintaining exact class balances across all 22 crops.
+                </div>
+            </li>
+            <li style="display: flex; gap: 0.75rem;">
+                <span>🎯</span>
+                <div>
+                    <strong style="color: var(--text-main);">Soft Probability Voting:</strong>
+                    Generates class probability distributions allowing farmers to see top-3 alternative crop suggestions when soil conditions overlap.
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+{% endblock %}

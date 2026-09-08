@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}Interactive Crop Catalog - 22 Agricultural Crop Profiles{% endblock %}
+
+{% block content %}
+
+<header class="hero-header" style="background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);">
+    <div class="hero-content">
+        <span class="hero-tag">📖 Crop Knowledge Hub</span>
+        <h1 class="hero-title">Crop Catalog & Ideal Conditions</h1>
+        <p class="hero-desc">
+            Explore optimal nutrient ranges and weather conditions for all 22 supported crops. Click any crop to load its standard metrics directly into the predictor.
+        </p>
+    </div>
+</header>
+
+<div class="catalog-search-bar">
+    <input type="text" id="catalogSearch" class="search-input" placeholder="🔍 Search crops by name (e.g., Rice, Apple, Cotton, Coffee)...">
+</div>
+
+<div class="catalog-grid" id="catalogGrid">
+    {% for name, stats in crop_catalog.items() %}
+    <div class="glass-panel crop-card" data-crop-name="{{ name }}">
+        <div>
+            <div class="crop-card-header">
+                <h3 class="crop-card-name">{{ name }}</h3>
+                <span class="crop-badge">2,200 dataset baseline</span>
+            </div>
+
+            <ul class="crop-metrics-list">
+                <li class="crop-metric-item">
+                    <span class="metric-label">🧪 Nitrogen (N)</span>
+                    <span class="metric-val">{{ stats.N.mean }} kg/ha</span>
+                </li>
+                <li class="crop-metric-item">
+                    <span class="metric-label">⚡ Phosphorus (P)</span>
+                    <span class="metric-val">{{ stats.P.mean }} kg/ha</span>
+                </li>
+                <li class="crop-metric-item">
+                    <span class="metric-label">💎 Potassium (K)</span>
+                    <span class="metric-val">{{ stats.K.mean }} kg/ha</span>
+                </li>
+                <li class="crop-metric-item">
+                    <span class="metric-label">🌡️ Temperature</span>
+                    <span class="metric-val">{{ stats.temperature.mean }} °C</span>
+                </li>
+                <li class="crop-metric-item">
+                    <span class="metric-label">💧 Humidity</span>
+                    <span class="metric-val">{{ stats.humidity.mean }} %</span>
+                </li>
+                <li class="crop-metric-item">
+                    <span class="metric-label">🧪 Soil pH</span>
+                    <span class="metric-val">{{ stats.ph.mean }}</span>
+                </li>
+                <li class="crop-metric-item">
+                    <span class="metric-label">🌧️ Rainfall</span>
+                    <span class="metric-val">{{ stats.rainfall.mean }} mm</span>
+                </li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn-secondary" style="width: 100%; margin-top: 1rem;" 
+                onclick='loadCropPreset({{ {
+                    "N": stats.N.mean,
+                    "P": stats.P.mean,
+                    "K": stats.K.mean,
+                    "temperature": stats.temperature.mean,
+                    "humidity": stats.humidity.mean,
+                    "ph": stats.ph.mean,
+                    "rainfall": stats.rainfall.mean
+                }|tojson|safe }})'>
+            <span>✨ Load Into Predictor</span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

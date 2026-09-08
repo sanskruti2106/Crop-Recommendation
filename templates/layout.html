@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Smart Crop Recommendation AI{% endblock %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI-powered Crop Recommendation System using Machine Learning to predict optimal crops based on soil nutrients and climatic parameters.">
+    <meta name="keywords" content="Crop Recommendation, Machine Learning, Agriculture AI, Soil Testing, Precision Farming">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- App Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand">
+                <div class="brand-icon">🌱</div>
+                <span>CropAI Intelligence</span>
+            </a>
+
+            <ul class="nav-links">
+                <li>
+                    <a href="/" class="nav-link {% if active_page == 'home' %}active{% endif %}">
+                        🌾 Predictor
+                    </a>
+                </li>
+                <li>
+                    <a href="/catalog" class="nav-link {% if active_page == 'catalog' %}active{% endif %}">
+                        📖 Crop Catalog
+                    </a>
+                </li>
+                <li>
+                    <a href="/how-it-works" class="nav-link {% if active_page == 'how_it_works' %}active{% endif %}">
+                        ⚙️ How It Works
+                    </a>
+                </li>
+                <li>
+                    <a href="/about" class="nav-link {% if active_page == 'about' %}active{% endif %}">
+                        📊 Model Insights
+                    </a>
+                </li>
+                <li>
+                    <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
+                        🌙
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+            <div>
+                <strong>Crop Recommendation System</strong> &bull; Powered by Random Forest Classifier
+            </div>
+            <div>
+                Precision Agriculture AI &bull; Model Accuracy: <strong>{{ accuracy if accuracy else '99.55' }}%</strong>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
